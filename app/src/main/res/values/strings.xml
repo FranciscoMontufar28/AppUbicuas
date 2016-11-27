@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">AppUbicuas</string>
+    <string name="url_db_tags">http://192.168.0.17/tags/public/index.php/tags/"%s"</string>
+</resources>
