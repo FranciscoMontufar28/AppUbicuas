@@ -1,61 +1,70 @@
 package com.example.francisco.appubicuas.net.api;
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
 
-import com.example.francisco.appubicuas.MainActivity;
 import com.example.francisco.appubicuas.R;
 import com.example.francisco.appubicuas.models.TagSearch;
+import com.example.francisco.appubicuas.net.HttpApi;
 import com.example.francisco.appubicuas.net.HttpAsyncTask;
+import com.example.francisco.appubicuas.net.Response;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.StringTokenizer;
 
 /**
  * Created by jhovy on 26/11/2016.
  */
 
-public class TagSearchApi implements HttpAsyncTask.OnResponseReceived {
+public class TagSearchApi extends HttpApi{
 
-    OnTagSearch onTagSearch;
+    static final int REQUEST_TAG = 0;
 
-    public interface OnTagSearch{
+    public interface onTagSearch{
         void onTagSearch(List<TagSearch> data);
     }
 
-    public TagSearchApi(OnTagSearch onTagSearch) {
-        this.onTagSearch = onTagSearch;
+    onTagSearch onTagSearch;
+
+    public TagSearchApi(Context context) {
+        super(context);
     }
 
-    public void getDescriptionsSearch(Context context, String id){
+    public void getTag(String id, onTagSearch onTagSearch){
+        this.onTagSearch = onTagSearch;
 
-        //String n = name.replaceAll(" ", "+");
-        String url = String.format(context.getString(R.string.url_db_tags), id);
-        HttpAsyncTask task = new HttpAsyncTask(this);
+        String url = urlBase+'"'+id+'"';
+        Log.e("URL", ""+url);
+        HttpAsyncTask task = makeTask(REQUEST_TAG, HttpAsyncTask.METHOD_GET);
         task.execute(url);
     }
 
-    @Override
-    public void onResponse(boolean success, String json) {
+    public void getTag(onTagSearch onTagSearch){
+        this.onTagSearch = onTagSearch;
 
-        Type type = new TypeToken<List<TagSearch>>(){}.getType();
-        Gson gson = new Gson();
-        List<TagSearch> data = gson.fromJson(json, type);
-        onTagSearch.onTagSearch(data);
+        String url = urlBase+"04f087ca9f3c80";
+        Log.e("URL", ""+url);
+        HttpAsyncTask task = makeTask(REQUEST_TAG, HttpAsyncTask.METHOD_GET);
+        task.execute(url);
+    }
 
-        /*try {
-            JSONObject obj = new JSONObject(json);
+    void processUsuarios(Response response){
+        if(validateError(response)){
             Type type = new TypeToken<List<TagSearch>>(){}.getType();
-            List<TagSearch> data = gson.fromJson(obj.get("Search").toString(), type);
+            List<TagSearch> data = gson.fromJson(response.getMsg(),type);
             onTagSearch.onTagSearch(data);
-        }catch (JSONException e){
-            e.printStackTrace();
-        }*/
+        }
+    }
 
+    @Override
+    public void onResponse(int request, Response response) {
+        switch (request){
+            case REQUEST_TAG:
+                processUsuarios(response);
+                break;
+        }
     }
 }
