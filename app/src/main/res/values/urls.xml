@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="url_base">"http://192.168.0.17/tags/public/index.php/tags/"</string>
+    <string name="url_base">"http://192.168.0.105:3000/beacons/"</string>
 
 </resources>

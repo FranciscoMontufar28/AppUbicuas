@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.francisco.appubicuas.adapters.TagsAdapter;
 import com.example.francisco.appubicuas.models.TagSearch;
@@ -28,6 +29,9 @@ public class TagListActivity extends AppCompatActivity implements TagSearchApi.o
     List<TagSearch> data;
     TagsAdapter adapter;
     NfcAdapter nfcadapter;
+    int price_string=0;
+    int price =0;
+    TextView precio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +48,9 @@ public class TagListActivity extends AppCompatActivity implements TagSearchApi.o
         adapter = new TagsAdapter(getLayoutInflater(), data);
         list.setAdapter(adapter);
 
-        TagSearchApi api = new TagSearchApi(this);
-        api.getTag(this);
+        precio= (TextView) findViewById(R.id.price_total_list);
+        //TagSearchApi api = new TagSearchApi(this);
+        //api.getTag(this);
 
 
 
@@ -55,7 +60,11 @@ public class TagListActivity extends AppCompatActivity implements TagSearchApi.o
     public void onTagSearch(List<TagSearch> data) {
         for (TagSearch u : data){
             this.data.add(u);
+            price= Integer.parseInt(u.getPrecio());
+
         }
+        price_string=price+price_string;
+        precio.setText("Precio total: "+price_string);
         adapter.notifyDataSetChanged();
     }
 
@@ -95,8 +104,8 @@ public class TagListActivity extends AppCompatActivity implements TagSearchApi.o
             hex[1] = Character.forDigit(id[i] & 0x0f,16);
             builder.append(hex);
         }
-        //TagSearchApi api = new TagSearchApi(this);
-        //api.getTag(""+builder, this);
+        TagSearchApi api = new TagSearchApi(this);
+        api.getTag(""+builder, this);
         return ""+builder;
 
     }

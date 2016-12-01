@@ -9,16 +9,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.francisco.appubicuas.net.api.TagSearchApi;
+
 public class MainActivity extends AppCompatActivity {
 
     NfcAdapter adapter;
+    TagSearchApi api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        NfcManager manager = (NfcManager) getSystemService(NFC_SERVICE);
-        adapter = manager.getDefaultAdapter();
+        //NfcManager manager = (NfcManager) getSystemService(NFC_SERVICE);
+        //adapter = manager.getDefaultAdapter();
     }
 
     @Override
@@ -57,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
             hex[1] = Character.forDigit(id[i] & 0x0f,16);
             builder.append(hex);
         }
+
+        NfcManager manager = (NfcManager) getSystemService(NFC_SERVICE);
+        adapter = manager.getDefaultAdapter();
 
         return ""+builder;
     }

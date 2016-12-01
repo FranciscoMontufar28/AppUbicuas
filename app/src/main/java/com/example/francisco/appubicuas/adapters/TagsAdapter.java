@@ -1,5 +1,7 @@
 package com.example.francisco.appubicuas.adapters;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,13 +9,16 @@ import android.widget.BaseAdapter;
 
 import com.example.francisco.appubicuas.databinding.TemplateListTagsBinding;
 import com.example.francisco.appubicuas.models.TagSearch;
+import com.squareup.picasso.Picasso;
 
+import java.net.URI;
 import java.util.List;
 
 
 public class TagsAdapter extends BaseAdapter{
     LayoutInflater inflater;
     List<TagSearch> data;
+    Context context;
 
 
     public TagsAdapter(LayoutInflater inflater, List<TagSearch> data) {
@@ -40,7 +45,6 @@ public class TagsAdapter extends BaseAdapter{
     public View getView(int i, View view, ViewGroup viewGroup) {
         TemplateListTagsBinding binding = TemplateListTagsBinding.inflate(inflater);
         binding.setTagSearch(data.get(i));
-
         return binding.getRoot();
     }
 }
