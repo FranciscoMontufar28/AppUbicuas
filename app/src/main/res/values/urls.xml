@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="url_base_beacons">"http://192.168.0.17:3000/beacons/"</string>
-    <string name="url_base_tags">"http://192.168.0.17:3000/tags/"</string>
+    <string name="url_base_beacons">"http://192.168.0.29:3000/beacons/"</string>
+    <string name="url_base_tags">"http://192.168.0.29:3000/tags/"</string>
 
 </resources>

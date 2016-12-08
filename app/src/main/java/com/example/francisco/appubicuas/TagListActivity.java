@@ -26,7 +26,7 @@ import java.util.List;
 
 public class TagListActivity extends AppCompatActivity implements TagSearchApi.onTagSearch {
 
-    List<TagSearch> data;
+    static List<TagSearch> data;
     TagsAdapter adapter;
     NfcAdapter nfcadapter;
     int price_string=0;

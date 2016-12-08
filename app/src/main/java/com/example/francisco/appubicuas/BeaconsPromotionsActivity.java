@@ -32,6 +32,9 @@ public class BeaconsPromotionsActivity extends AppCompatActivity implements Beac
     FloatingActionButton button;
     Context context;
 
+    public static final int SECCIONUNO = 22771;
+    public static final int SECCIONDOS = 22772;
+
     private BeaconManager beaconManager;
     private Region region;
     static int majorbeacon;
@@ -72,7 +75,6 @@ public class BeaconsPromotionsActivity extends AppCompatActivity implements Beac
         super.onResume();
         Log.e("ciclo", "onResume");
         SystemRequirementsChecker.checkWithDefaultDialogs(this);
-
         beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
             @Override
             public void onServiceReady() {
@@ -146,10 +148,17 @@ public class BeaconsPromotionsActivity extends AppCompatActivity implements Beac
         Toast.makeText(this, ""+major, Toast.LENGTH_LONG).show();
         BeaconSearchApi api = new BeaconSearchApi(this);
         Log.e("ciclo", "estoy aqui onBeacon");
-        api.getBeacon(""+major, this);
-
+        if(SECCIONUNO==major) {
+            api.getBeacon("" + major, this);
+            SystemRequirementsChecker.checkWithDefaultDialogs(this);
+            beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+                @Override
+                public void onServiceReady() {
+                    beaconManager.startRanging(region);
+                }
+            });
+        }else {
         SystemRequirementsChecker.checkWithDefaultDialogs(this);
-
         beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
             @Override
             public void onServiceReady() {
@@ -157,6 +166,7 @@ public class BeaconsPromotionsActivity extends AppCompatActivity implements Beac
             }
         });
 
+    }
     }
 
     @Override
