@@ -31,7 +31,8 @@
                     android:id="@+id/image_item_scanned"
                     android:layout_width="match_parent"
                     android:layout_height="160dp"
-                    android:background="#333" />
+                    android:background="#333"
+                    app:imgUrl="@{TagSearch.imagen}"/>
 
                 <ImageView
                     android:id="@+id/name_item_icon"
@@ -57,7 +58,8 @@
                     android:layout_height="@dimen/icon_small"
                     android:src="@drawable/ic_money"
                     android:layout_below="@+id/name_item_icon"
-                    android:layout_marginTop="10dp" />
+                    android:layout_marginTop="10dp"
+                    />
 
                 <TextView
                     style="@style/Base.TextAppearance.AppCompat.Body1"

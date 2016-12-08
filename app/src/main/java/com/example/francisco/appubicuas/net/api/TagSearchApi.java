@@ -36,7 +36,7 @@ public class TagSearchApi extends HttpApi{
     public void getTag(String id, onTagSearch onTagSearch){
         this.onTagSearch = onTagSearch;
 
-        String url = urlBase+id;
+        String url = urlBaseTags+id;
         Log.e("URL", ""+url);
         HttpAsyncTask task = makeTask(REQUEST_TAG, HttpAsyncTask.METHOD_GET);
         task.execute(url);
@@ -45,7 +45,7 @@ public class TagSearchApi extends HttpApi{
     public void getTag(onTagSearch onTagSearch){
         this.onTagSearch = onTagSearch;
 
-        String url = urlBase+"04f087ca9f3c80";
+        String url = urlBaseTags+"04f087ca9f3c80";
         Log.e("URL", ""+url);
         HttpAsyncTask task = makeTask(REQUEST_TAG, HttpAsyncTask.METHOD_GET);
         task.execute(url);

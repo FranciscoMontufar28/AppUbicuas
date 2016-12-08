@@ -16,12 +16,13 @@ import com.google.gson.Gson;
 public abstract class HttpApi implements HttpAsyncTask.OnResponseListener {
 
     protected Context context;
-    protected String urlBase;
+    protected String urlBaseBeacons, urlBaseTags;
     protected Gson gson;
 
     public HttpApi(Context context) {
         this.context = context;
-        urlBase = context.getString(R.string.url_base);
+        urlBaseBeacons = context.getString(R.string.url_base_beacons);
+        urlBaseTags = context.getString(R.string.url_base_tags);
         gson = new Gson();
     }
 
